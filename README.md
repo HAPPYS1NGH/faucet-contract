@@ -87,6 +87,12 @@ source .env.local
  forge create --rpc-url $RPC  --private-key $PRIVATE_KEY  --etherscan-api-key $ETHERSCAN_API_KEY --verify src/Faucet.sol:Faucet
 ```
 
+### Fund the contract
+
+```bash
+cast send <contract-address> --value 10ether -r $BASE_SEPOLIA_RPC --private-key $PRIVATE_KEY  --etherscan-api-key $BASESCAN_SEPOLIA_API_KEY
+```
+
 ### Help
 
 ```bash
