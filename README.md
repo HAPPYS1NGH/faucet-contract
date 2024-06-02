@@ -23,6 +23,16 @@ The Faucet contract consists of the following components:
   - `dripTokensToAddress`: Allows the owner to drip tokens to a specified address.
   - `withdraw`: Allows the owner to withdraw Ether from the contract.
 
+## Deployed Contract
+
+### Arbitrum Sepolia
+
+0x0dB9C4aDFdd44ca2284eDEb4Fe4a81e014725120
+
+### Base Sepolia
+
+0x4fCCb94c16C519F2b568dE6f444442F10075Dc1e
+
 ## Usage
 
 ### Build
