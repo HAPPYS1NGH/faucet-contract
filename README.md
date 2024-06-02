@@ -1,66 +1,134 @@
-## Foundry
+# Faucet Smart Contract Documentation
 
-**Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**
+## Overview
 
-Foundry consists of:
+The Faucet smart contract is designed to distribute tokens to users upon request. It provides a mechanism for distributing tokens to specific addresses and tracking the last time tokens were distributed to an address or a specific fid. This documentation outlines the functionality, usage, and testing of the Faucet contract.
 
--   **Forge**: Ethereum testing framework (like Truffle, Hardhat and DappTools).
--   **Cast**: Swiss army knife for interacting with EVM smart contracts, sending transactions and getting chain data.
--   **Anvil**: Local Ethereum node, akin to Ganache, Hardhat Network.
--   **Chisel**: Fast, utilitarian, and verbose solidity REPL.
+## Contract Structure
 
-## Documentation
+The Faucet contract consists of the following components:
 
-https://book.getfoundry.sh/
+- **State Variables:**
+  - `lastDripTimestampByAddress`: Tracks the last time tokens were dripped to an address.
+  - `lastDripTimestampByFid`: Tracks the last time tokens were dripped to a specific fid.
+- **Events:**
+
+  - `TokensDripped`: Triggered when tokens are successfully dripped to an address.
+  - `TokensReceived`: Triggered when the contract receives tokens.
+
+- **Functions:**
+  - `constructor`: Initializes the contract and sets the owner.
+  - `receive`: Default fallback function to receive Ether.
+  - `fallback`: Fallback function to receive Ether.
+  - `dripTokensToAddress`: Allows the owner to drip tokens to a specified address.
+  - `withdraw`: Allows the owner to withdraw Ether from the contract.
 
 ## Usage
 
 ### Build
 
-```shell
-$ forge build
+```bash
+ forge build
 ```
 
 ### Test
 
-```shell
-$ forge test
+```bash
+ forge test
 ```
 
 ### Format
 
-```shell
-$ forge fmt
+```bash
+ forge fmt
 ```
 
 ### Gas Snapshots
 
-```shell
-$ forge snapshot
+```bash
+ forge snapshot
 ```
 
 ### Anvil
 
-```shell
-$ anvil
-```
-
-### Deploy
-
-```shell
-$ forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --private-key <your_private_key>
+```bash
+ anvil
 ```
 
 ### Cast
 
-```shell
-$ cast <subcommand>
+```bash
+ cast <subcommand>
+```
+
+## Deploy
+
+Create a copy of .env.sample and fill the details with your Keys.
+
+```bash
+source .env.local
+```
+
+### Base Sepolia
+
+```bash
+ forge create --rpc-url $BASE_SEPOLIA_RPC  --private-key $PRIVATE_KEY  --etherscan-api-key $BASESCAN_SEPOLIA_API_KEY --verify src/Faucet.sol:Faucet
+```
+
+### Arbitrum Sepolia
+
+```bash
+ forge create --rpc-url $ARBITRUM_SEPOLIA_RPC  --private-key $PRIVATE_KEY  --etherscan-api-key $ARBISCAN_SEPOLIA_API_KEY --verify src/Faucet.sol:Faucet
+```
+
+### Any Network
+
+```bash
+ forge create --rpc-url $RPC  --private-key $PRIVATE_KEY  --etherscan-api-key $ETHERSCAN_API_KEY --verify src/Faucet.sol:Faucet
 ```
 
 ### Help
 
-```shell
-$ forge --help
-$ anvil --help
-$ cast --help
+```bash
+
+forge --help
+anvil --help
+cast --help
 ```
+
+## Tests
+
+The Faucet contract is thoroughly tested to ensure its functionality. Test cases cover various scenarios such as dripping tokens, preventing multiple drips within 24 hours, balance thresholds, event emission, and ownership control.
+
+## File Structure
+
+```
+.
+├── README.md
+├── foundry.toml
+├── remappings.txt
+├── env.local
+├── env.sample
+├── script
+│   └── Faucet.sol
+├── src
+│   └── Faucet.sol
+└── test
+    └── Faucet.t.sol
+```
+
+## Documentation
+
+For more detailed documentation, refer to the [Foundry Book](https://book.getfoundry.sh/).
+
+## Dependencies
+
+- [OpenZeppelin Contracts](https://github.com/OpenZeppelin/openzeppelin-contracts): Used for the `Ownable` contract.
+
+## License
+
+This contract is licensed under the MIT License.
+
+## Author
+
+@HAPPYS1NGH
