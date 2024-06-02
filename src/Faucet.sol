@@ -69,6 +69,13 @@ contract Faucet is Ownable {
         }
     }
 
+    function withdraw() external onlyOwner {
+        (bool success,) = msg.sender.call{value: address(this).balance}("");
+        if (!success) {
+            revert UnableToTransfer();
+        }
+    }
+
     /////////////////////////////////
     // VIEW AND PUBLIC FUNCTIONS ////
     /////////////////////////////////

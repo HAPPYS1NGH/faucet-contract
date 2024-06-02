@@ -182,4 +182,25 @@ contract FaucetTest is Test {
 
         vm.stopPrank();
     }
+
+    function test_withdraw() public {
+        vm.startPrank(owner);
+        uint256 faucetBalance = address(faucet).balance;
+        uint256 ownerBalance = owner.balance;
+        // Withdraw the contract balance
+        faucet.withdraw();
+
+        assertEq(address(faucet).balance, 0, "Faucet balance should be 0 after withdrawal");
+        assertEq(owner.balance, ownerBalance + faucetBalance, "Owner balance should increase by the contract balance");
+
+        vm.stopPrank();
+    }
+
+    function test_UnAuthorisedWithdrawal() public {
+        vm.startPrank(user);
+        // Try to withdraw as a non-owner
+        vm.expectRevert(abi.encodeWithSelector(Ownable.OwnableUnauthorizedAccount.selector, user));
+        faucet.withdraw();
+        vm.stopPrank();
+    }
 }
