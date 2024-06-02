@@ -27,11 +27,11 @@ The Faucet contract consists of the following components:
 
 ### Arbitrum Sepolia
 
-0x0dB9C4aDFdd44ca2284eDEb4Fe4a81e014725120
+0x12AD3E396E2574bf7ADd2D4253Ab27C94B247C74
 
 ### Base Sepolia
 
-0x4fCCb94c16C519F2b568dE6f444442F10075Dc1e
+0x12AD3E396E2574bf7ADd2D4253Ab27C94B247C74
 
 ## Usage
 
