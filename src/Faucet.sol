@@ -1,8 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.20;
 
-import {Ownable} from
-    "/Users/happy/Documents/Blockchain/Arbitrum/faucet-contract/lib/openzeppelin-contracts/contracts/access/Ownable.sol";
+import {Ownable} from "@openzeppelin/contracts/access/Ownable.sol";
 
 contract Faucet is Ownable {
     //////////////////////////////
@@ -58,7 +57,6 @@ contract Faucet is Ownable {
         if (isBalanceAboveThreshold(to)) {
             revert EnoughBalance();
         }
-
         lastDripTimestampByAddress[to] = block.timestamp;
         lastDripTimestampByFid[fid] = block.timestamp;
 
