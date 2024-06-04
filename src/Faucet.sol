@@ -89,6 +89,6 @@ contract Faucet is Ownable {
     }
 
     function isBalanceAboveThreshold(address add) public view returns (bool) {
-        return add.balance > 0.1 ether;
+        return add.balance > 1 ether;
     }
 }
