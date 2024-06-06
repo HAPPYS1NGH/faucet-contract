@@ -73,34 +73,50 @@ The Faucet contract consists of the following components:
 
 ## Deploy
 
-Create a copy of .env.sample and fill the details with your Keys.
+Create a copy of .env.sample and fill the details with your RPCs.
 
 ```bash
 source .env.local
 ```
 
-### Base Sepolia
+### Importing Private Key
+
+We will encrypt our private keys into a JSON format.
 
 ```bash
- forge create --rpc-url $BASE_SEPOLIA_RPC  --private-key $PRIVATE_KEY  --etherscan-api-key $BASESCAN_SEPOLIA_API_KEY --verify src/Faucet.sol:Faucet
+  cast wallet import defaultKey --interactive
 ```
 
-### Arbitrum Sepolia
+You will then be promtpted to enter Private Key and a Password whenever you want to use it.
+
+Check if the wallet is configured.
 
 ```bash
- forge create --rpc-url $ARBITRUM_SEPOLIA_RPC  --private-key $PRIVATE_KEY  --etherscan-api-key $ARBISCAN_SEPOLIA_API_KEY --verify src/Faucet.sol:Faucet
+  cast wallet list
+```
+
+### Base
+
+```bash
+ forge create --rpc-url $BASE_SEPOLIA_RPC  --account defaultKey  --etherscan-api-key $BASESCAN_SEPOLIA_API_KEY --verify src/Faucet.sol:Faucet
+```
+
+### Arbitrum
+
+```bash
+ forge create --rpc-url $ARBITRUM_SEPOLIA_RPC   --account defaultKey   --etherscan-api-key $ARBISCAN_SEPOLIA_API_KEY --verify src/Faucet.sol:Faucet
 ```
 
 ### Any Network
 
 ```bash
- forge create --rpc-url $RPC  --private-key $PRIVATE_KEY  --etherscan-api-key $ETHERSCAN_API_KEY --verify src/Faucet.sol:Faucet
+ forge create --rpc-url $RPC   --account defaultKey   --etherscan-api-key $ETHERSCAN_API_KEY --verify src/Faucet.sol:Faucet
 ```
 
 ### Fund the contract
 
 ```bash
-cast send <contract-address> --value 10ether -r $BASE_SEPOLIA_RPC --private-key $PRIVATE_KEY  --etherscan-api-key $BASESCAN_SEPOLIA_API_KEY
+cast send <contract-address> --value 10ether -r $BASE_SEPOLIA_RPC  --account defaultKey   --etherscan-api-key $BASESCAN_SEPOLIA_API_KEY
 ```
 
 ### Help
@@ -118,8 +134,7 @@ The Faucet contract is thoroughly tested to ensure its functionality. Test cases
 
 ## File Structure
 
-```
-.
+`.
 ├── README.md
 ├── foundry.toml
 ├── remappings.txt
@@ -130,8 +145,7 @@ The Faucet contract is thoroughly tested to ensure its functionality. Test cases
 ├── src
 │   └── Faucet.sol
 └── test
-    └── Faucet.t.sol
-```
+    └── Faucet.t.sol`
 
 ## Documentation
 
