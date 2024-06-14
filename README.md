@@ -126,7 +126,7 @@ forge create --rpc-url https://sepolia.mode.network --account defaultKey --verif
 ### Fund the contract
 
 ```bash
-cast send <contract-address> --value 10ether -r $BASE_SEPOLIA_RPC  --account defaultKey   --etherscan-api-key $BASESCAN_SEPOLIA_API_KEY
+cast send <contract-address> --value 10ether -r $NETWORK_RPC  --account defaultKey   --etherscan-api-key $NETWORK_API_KEY
 ```
 
 ### Help
