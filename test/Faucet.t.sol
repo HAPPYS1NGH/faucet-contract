@@ -83,7 +83,7 @@ contract FaucetTest is Test {
         uint256 fid = 123;
 
         // Give the user a balance above the threshold
-        vm.deal(user, 0.2 ether);
+        vm.deal(user, 1.2 ether);
 
         // Try to drip tokens to user with balance above threshold
         vm.expectRevert(Faucet.EnoughBalance.selector);
