@@ -33,6 +33,10 @@ The Faucet contract consists of the following components:
 
 0x2aAB66f75ae1C34e5bDEF6fcfC58a641F2d3D9ed
 
+## Mode Sepolia
+
+0x2aAB66f75ae1C34e5bDEF6fcfC58a641F2d3D9ed
+
 ## Usage
 
 ### Build
@@ -107,6 +111,12 @@ Check if the wallet is configured.
  forge create --rpc-url $ARBITRUM_SEPOLIA_RPC   --account defaultKey   --etherscan-api-key $ARBISCAN_SEPOLIA_API_KEY --verify src/Faucet.sol:Faucet
 ```
 
+### Mode
+
+```bash
+forge create --rpc-url https://sepolia.mode.network --account defaultKey --verify --verifier blockscout --verifier-url https://sepolia.explorer.mode.network/api\? src/Faucet.sol:Faucet --priority-gas-price 1
+```
+
 ### Any Network
 
 ```bash
@@ -116,7 +126,7 @@ Check if the wallet is configured.
 ### Fund the contract
 
 ```bash
-cast send <contract-address> --value 10ether -r $BASE_SEPOLIA_RPC  --account defaultKey   --etherscan-api-key $BASESCAN_SEPOLIA_API_KEY
+cast send <contract-address> --value 10ether -r $NETWORK_RPC  --account defaultKey   --etherscan-api-key $NETWORK_API_KEY
 ```
 
 ### Help
@@ -127,6 +137,18 @@ forge --help
 anvil --help
 cast --help
 ```
+
+#### Mode Error
+
+It is possible you get the error
+
+`server returned an error response: error code -32000: transaction underpriced: gas tip cap 0, minimum needed 1`
+
+while posting transaction to Mode Sepolia. It is because the gas estimation is not done properly.
+
+Solve it by adding a custom priority gas fee
+
+`--priority-gas-price 1`
 
 ## Tests
 
